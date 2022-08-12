@@ -1,6 +1,8 @@
 
 //import 'login.dart';
 import 'package:flutter/material.dart';
+
+import 'login.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -9,6 +11,8 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPage extends State<SignupPage>{
+   double height;
+ double width;
   
   TextEditingController userRole  = new TextEditingController(); 
   TextEditingController userName  = new TextEditingController(); 
@@ -17,40 +21,87 @@ class _SignupPage extends State<SignupPage>{
   
   final GlobalKey<FormState> xfromkey =GlobalKey<FormState>();
   //final auth =FirebaseAuth.instance ;
-  
+   // Declare this variable
+int selectedRadio;
+ 
+@override
+void initState() {
+  super.initState();
+  selectedRadio = 0;
+}
+ 
+// Changes the selected value on 'onChanged' click on each radio button
+setSelectedRadio(int val) {
+  setState(() {
+    selectedRadio = val;
+  });
+}
   @override
   Widget build(BuildContext context){
+    height= MediaQuery.of(context).size.height;
+   
+   width= MediaQuery.of(context).size.width;
 return Scaffold(
 resizeToAvoidBottomInset: true,
 backgroundColor: Colors.white,
-body: Form(
-  key: xfromkey,
-  child:ListView(
+
+ 
+        
+body:Center(
+            child: Container(
+      width: 400,
+      height: 400,
+      color: Colors.white10,
+       /*Form(
+  
+  key: xfromkey,*/
+  child:Stack(
+        children:[
+          Column(children:[
+            Container(height:height*.5,
+            decoration: BoxDecoration(
+              color: const Color(0xFF4ad7d1),
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(50),
+              )
+            
+              ),
+              ),
+
+
+               Container(
+                  decoration: BoxDecoration(
+              color: const Color(0xFF4ad7d1),
+             
+              ),
+            
+              
+                 child: Container(height:height*.5,
+            decoration: BoxDecoration(
+              color:  Colors.white,
+               borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50),
+            
+            ),
+            ),
+               ),),
+           ],
+            ),
+       
+       Container( 
+    child:ListView(
     children: [
       Container(   
-          decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-          Color(0XFFFFCCBC).withOpacity(0.1),
-         Color(0XFFFB8C00).withOpacity(0.7),
-      ],
-    
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter
-      )
-    ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 40
-      ),
-    height: MediaQuery.of(context).size.height,
-    width: double.infinity,
+        
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Column(
           children:<Widget> [
-  Text("Inscrire",style: TextStyle(
+  Text("Inscription",style: TextStyle(
           fontSize: 30,
           fontWeight: FontWeight.bold,
+           color: Color(0XFF001730),
   
         ),),
   SizedBox(
@@ -74,7 +125,7 @@ validator:(String input){
     return null;
     },
   
-  decoration: InputDecoration(labelText: 'Nom'),
+  decoration: InputDecoration(labelText: 'Nom & Prénom'),
   ),
     TextFormField(
   controller: email,
@@ -88,7 +139,7 @@ validator:(String input){
     return null;
     },
   
-  decoration: InputDecoration(labelText: 'Email'),
+  decoration: InputDecoration(labelText: 'Spécialité principale'),
   ),
     TextFormField(controller: passWord,
   validator:(String input){
@@ -98,64 +149,81 @@ validator:(String input){
   return null;
   },
   
-  decoration: InputDecoration(labelText: 'Mot de passe'),
+  decoration: InputDecoration(labelText: ' Autre spécialités'),
   obscureText: true,
   ),
-  
-  TextFormField(controller: userRole,
-  validator:(String input){
-  if (input.isEmpty){
-  return 'choisie votre rôle "assistant ou patient"';
-  }
-  return null;
-  },
-  
-  decoration: InputDecoration(labelText: 'Votre rôle'),
-  
+  SizedBox(height: 20),
+     Text('Sexe',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18,
+  color:Colors.grey
+  ),
+  ),
+
+
+
+Column(
+      children: <Widget>[ButtonBar(
+       
+  alignment: MainAxisAlignment.center,
+  children: <Widget>[
+    Radio(
+      value: 1,
+      groupValue: selectedRadio,
+      activeColor: Colors.green,
+      onChanged: (val) {
+        print("Radio $val");
+        setSelectedRadio(val);
+      },
+    ),
+    Radio(
+      value: 2,
+      groupValue: selectedRadio,
+      activeColor: Colors.blue,
+      onChanged: (val) {
+        print("Radio $val");
+        setSelectedRadio(val);
+      },
+    ),
+  ],
+)
+      ],
   ),
   
-  ],
-      ) , 
-      Container(
+  Container(
   padding: EdgeInsets.only(top:3,left: 3 ),
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(50),
     color: Colors.cyan[100],
-  border: Border(
-    bottom: BorderSide(color: Colors.black),
-    top: BorderSide(color: Colors.black),
-    left: BorderSide(color: Colors.black),
-    right: BorderSide(color: Colors.black),
-  
-  )
+ 
     ),
     child: MaterialButton(
     minWidth: double.infinity,
     height: 50,
     onPressed: (){
-     /*if(xfromkey.currentState.validate()){
+     if(xfromkey.currentState.validate()){
         print("successful");
         return
-      auth.createUserWithEmailAndPassword(email: email.text, password: passWord.text).then((value){
+     /* auth.createUserWithEmailAndPassword(email: email.text, password: passWord.text).then((value){
         Firestore.instance.collection("userData").document(value.user.uid).setData({
           "userName":userName.text,
           "email":value.user.email,
           "uid":value.user.uid,
           "role":userRole.text,
-        });
+        });*/
       this.setState(() {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Pagelogin()));
+          
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Pagelogin()));
           });
-      }); */
-    // }
+     
+       
+     }
      },
-    color: Color(0XFF006064),
+    color: Color(0XFFfe4a49),
   elevation: 0,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(50),
   
   ),
-  child: Text('Inscrire',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18,
+  child: Text('Suivant',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18,
   color:Colors.white 
   ),
   ),
@@ -180,12 +248,22 @@ validator:(String input){
       
     ),
     
-    ),
- ], ),
+    
+], 
+  
+),
+
 ),
 
 
-);
+],),
+)
+
+        ]
+        ),
+         
+),
+),);
 }
 
 }

@@ -41,13 +41,13 @@ class _Pagelogin extends State<Pagelogin> {
           });
     },*/
        
-      color: Color(0XFF006064),
+      color: Color(0XFFfe4a49),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50),
       ),
       child: Text(
-        'Connecter',
+        'Se Connecter',
         style: TextStyle(
             fontWeight: FontWeight.w600, fontSize: 18, color: Colors.white),
       ),
@@ -73,9 +73,10 @@ class _Pagelogin extends State<Pagelogin> {
                       Column(
                         children: <Widget>[
                           Text(
-                            'Connecter',
+                            'Connexion',
                             style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold),
+                                fontSize: 30, fontWeight: FontWeight.bold,   color: Color(0XFF001730),
+                                ),
                           ),
                           SizedBox(
                             height: 20,
@@ -116,7 +117,7 @@ class _Pagelogin extends State<Pagelogin> {
                                controller: passWord,
                               validator: (input) {
                                  if (input.isEmpty) {
-                                   //return 'Le mot de passe doit >4 caractères';
+                                   return 'Le mot de passe doit >4 caractères';
                                  }
                                 return null;
                                },
@@ -134,12 +135,7 @@ class _Pagelogin extends State<Pagelogin> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
                               color: Color(0XFFFE4A49),
-                              border: Border(
-                                bottom: BorderSide(color: Colors.black),
-                                top: BorderSide(color: Colors.black),
-                                left: BorderSide(color: Colors.black),
-                                right: BorderSide(color: Colors.black),
-                              )),
+                          ),
                           child: materialButton,
                         ),
                       ),
@@ -156,18 +152,44 @@ class _Pagelogin extends State<Pagelogin> {
                               fontWeight: FontWeight.w600,
                               fontSize: 20,
                             ),
-                          )
+                          ),
+                        
                         ],
                       ),
-                      Container(
+                      SizedBox( height: 20 ),
+                         Text("Ou"), 
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                     children: <Widget>[
+        SizedBox(height: 520),
+        Expanded(
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset('assets/google.png'),
+        )),
+        SizedBox(height: 520),
+        Expanded(
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset('assets/link.png'),
+        )),
+        SizedBox(height: 520),
+        Expanded(
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset('assets/facebook.png'),
+        )),
+      ]),
+                     /* Container(
+                       
                         padding: EdgeInsets.only(top: 70),
                         height: 120,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage("assets/photo1.jpg"),
                               fit: BoxFit.fitHeight),
-                        ),
-                      )
+                        
+                       ),  )*/
                     ],
                   ),
                 ),
